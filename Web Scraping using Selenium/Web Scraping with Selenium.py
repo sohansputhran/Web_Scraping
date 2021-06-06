@@ -16,19 +16,42 @@ driver = webdriver.Chrome(PATH)
 driver.get('https://techwithtim.net')
 print(driver.title)
 
-search = driver.find_element_by_name('s')
-search.send_keys("test")
-search.send_keys(Keys.RETURN)
+# Read some contents from the website using tag-names and class names
+# search = driver.find_element_
 
+# try:
+#     main = WebDriverWait(driver, 10).until(
+#         EC.presence_of_element_located((By.ID, "main"))
+#     )
+#     # print(main.text)
+#     articles = main.find_elements_by_tag_name("article")
+#     for article in articles:
+#         header = article.find_element_by_class_name("entry-summary")
+#         print(header.text)
+# except:
+#     driver.quit()
+
+# Click a link
+link = driver.find_element_by_link_text('Python Programming')
+link.click()
+
+# Wait for 10 sec for the link to be loaded
 try:
-    main = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "main"))
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.LINK_TEXT, "Beginner Python Tutorials"))
     )
-    # print(main.text)
-    articles = main.find_elements_by_tag_name("article")
-    for article in articles:
-        header = article.find_element_by_class_name("entry-summary")
-        print(header.text)
+    element.click()
+
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "sow-button-1931003"))
+    )
+    element.click()
+
+    driver.back()
+    driver.back()
+    driver.back()
+    driver.forward()
+    driver.forward()
 except:
     driver.quit()
 
